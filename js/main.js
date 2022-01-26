@@ -91,11 +91,14 @@ class Random {
     return min + (r % (max + 1 - min));
   }
 }
-
+function goal() {
+    alert('GOAL!');
+}
 function shot() {
     const selectItem = $('#nextList').val();
     $('#nextList > option').remove();
     if (selectItem == $('#destination')[0].value) {
+        goal();
     } else {
         $('#prevList').append($('<option>').html(selectItem).val(selectItem));
         getLinksByTitle(selectItem, '');
