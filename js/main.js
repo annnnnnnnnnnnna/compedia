@@ -3,7 +3,7 @@ function makeQuestion(random) {
 }
 function getOrigin(random, param) {
     if (param == '') {
-        param = "&pageids=" + random.nextInt(10000, 1000000);
+        param = "&pageids=" + random.nextInt(1, 4500000);
     }
     $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*" + param, function (json){
         let title = '';
@@ -29,7 +29,7 @@ function getOrigin(random, param) {
 }
 
 function getDestination(random) {
-    let param = "&pageids=" + random.nextInt(10000, 1000000);
+    let param = "&pageids=" + random.nextInt(1, 4500000);
     $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=1&origin=*"+param, function (json){
         let title = '';
 	for (const page in json.query.pages) {
