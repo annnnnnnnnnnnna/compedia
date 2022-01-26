@@ -30,22 +30,22 @@ function getOrigin(random, param) {
 
 function getDestination(random) {
     let param = "&pageids=" + random.nextInt(10000, 1000000);
-	$.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*"+param, function (json){
+    $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*"+param, function (json){
         let title = '';
-	    for (const page in json.query.pages) {
+	for (const page in json.query.pages) {
             if (json.query.pages[page].title && json.query.pages[page].ns == 0) {
                 title = json.query.pages[page].title;
-        	    $('#destination')[0].value = title;
+                $('#destination')[0].value = title;
             }
-	    }
+	}
         if (title == '') {
             getDestination(random);
         }
-	});
+    });
 }
 
 function getLinksByTitle(title, plcontinue){
-	$.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*&titles="+title+plcontinue, function (json){
+    $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*&titles="+title+plcontinue, function (json){
         for (const page in json.query.pages) {
             for (const link in json.query.pages[page].links) {
                 if (json.query.pages[page].links[link].ns == 0) {
@@ -56,7 +56,7 @@ function getLinksByTitle(title, plcontinue){
         if (json.continue && json.continue.plcontinue) {
             getLinksByTitle(title, '&plcontinue=' + json.continue.plcontinue);
         }
-	});
+    });
 }
 function today() {
     const today = new Date();
