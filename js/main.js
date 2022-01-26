@@ -30,7 +30,7 @@ function getOrigin(random, param) {
 
 function getDestination(random) {
     let param = "&pageids=" + random.nextInt(10000, 1000000);
-    $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*"+param, function (json){
+    $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=1&origin=*"+param, function (json){
         let title = '';
 	for (const page in json.query.pages) {
             if (json.query.pages[page].title && json.query.pages[page].ns == 0) {
