@@ -5,28 +5,30 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
     <title>Compedia</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="./css/cp.css" />
 </head>
-<body onload="today();popupDescription();">
+<body onload="today();popupDescription();" style="text-size-adjust: none; font-size:2em;">
 <input type="hidden" id="seed">
 <input type="hidden" id="orig_id">
 <input type="hidden" id="dest_id">
  <input type="hidden" id="destinationDetail">
- <div id="start_area"><div id="origin" style="width: 300px; font-size:1.5rem;"></div></div>
+ <div id="start_area"><div id="origin" style="width: 300px;"></div></div>
  <div id="via_area">
-   <ul id="prevList" style="width: 300px; font-size:1.5rem; list-style: '&#x2b07;';">
+   <ul id="prevList" style="width: 300px; list-style: '&#x2b07;';">
    </ul>
-   <ul id="qList" style="width: 300px; font-size:1.5rem; list-style: '&#x2b07;';">
+   <ul id="qList" style="width: 300px; list-style: '&#x2b07;';">
        <li>？</li>
    </ul>
  </div>
- <div id="goal_area" style="display:flex"><div id="destination" style="width: 300px; font-size:1.5rem;"></div><div id="question">&#x2753;</div></div>
+ <div id="goal_area" style="display:flex"><div id="destination" style="width: 300px;"></div><div id="question"style="">&#x2753;</div></div>
  <br>
  <br>
  <div id="next_area">
-   <select id="nextList" size="10" style="width: 300px; font-size:1.5rem;">
+   <select id="nextList" size="10" style="width: 300px;">
    </select>
   <input type="button" id="shot" value="GO" onclick="shot()">
  </div>
