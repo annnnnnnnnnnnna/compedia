@@ -131,6 +131,7 @@ function shot() {
     if (!$("#selected_item")[0].value || $("#selected_item")[0].value == '') return;
     const selectItem = $('#selected_item')[0].value;
     $("#selected_item")[0].value = "";
+    $("#selected_index")[0].value = "";
     $('#nextList > li').remove();
     if (selectItem == $('#destination')[0].value) {
         goal();
