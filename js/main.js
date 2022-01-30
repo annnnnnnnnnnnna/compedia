@@ -17,8 +17,9 @@ function getOrigin(random, param, param2) {
                 json.query.pages[page].links.forEach(function (link, index) {
                     if (link.ns == 0) {
                         let item = $('<li>').html(link.title);
+                        let ix = $("#nextList").children().length;
                         item.on('click', function() {
-                            selectItem(index);
+                            selectItem(ix);
                         });
                        $('#nextList').append(item);
                     }
@@ -64,8 +65,9 @@ function getLinksByTitle(title, plcontinue){
             json.query.pages[page].links.forEach(function (link, index) {
                 if (link.ns == 0) {
                     let item = $('<li>').html(link.title);
+                    let ix = $("#nextList").children().length;
                     item.on('click', function() {
-                        selectItem(index);
+                        selectItem(ix);
                     });
                    $('#nextList').append(item);
                 }
@@ -78,14 +80,10 @@ function getLinksByTitle(title, plcontinue){
 }
 
 function selectItem(index) {
-    for (let i = 0; i < $("#nextList").children().length; i++) {
-        if (index == i) {
-            $("#nextList").children()[i].className = "select_item";
-            $("#selected_item")[0].value = $("#nextList").children()[i].innerText;
-        } else {
-            $("#nextList").children()[i].className = "un_select_item";
-        }
-    }
+    if ($("#selected_index")[0].value) $("#nextList").children()[$("#selected_index")[0].value].className = "un_select_item";
+    $("#nextList").children()[index].className = "select_item";
+    $("#selected_index")[0].value = index;
+    $("#selected_item")[0].value = $("#nextList").children()[index].innerText;
 }
 function today() {
     const today = new Date();
@@ -130,6 +128,7 @@ function gameover() {
 }
 
 function shot() {
+    if (!$("#selected_item")[0].value || $("#selected_item")[0].value == '') return;
     const selectItem = $('#selected_item')[0].value;
     $("#selected_item")[0].value = "";
     $('#nextList > li').remove();
