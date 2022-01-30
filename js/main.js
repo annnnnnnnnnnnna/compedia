@@ -9,15 +9,20 @@ function getOrigin(random, param, param2) {
     $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&redirects=true&origin=*" + param, function (json){
         let title = '';
         for (const page in json.query.pages) {
-            if (json.query.pages[page].title && json.query.pages[page].ns == 0) {
+            if (json.query.pages[page].title && json.query.pages[page].ns == 0 && json.query.pages[page].links.length != 0) {
                 $('#orig_id')[0].value = json.query.pages[page].pageid;
                 title = json.query.pages[page].title;
                 $('#origin')[0].innerText = title;
-                for (const link in json.query.pages[page].links) {
-                    if (json.query.pages[page].links[link].ns == 0) {
-                        $('#nextList').append($('<option>').html(json.query.pages[page].links[link].title).val(json.query.pages[page].links[link].title));
+                $('#now_keyword')[0].innerText = title;
+                json.query.pages[page].links.forEach(function (link, index) {
+                    if (link.ns == 0) {
+                        let item = $('<li>').html(link.title);
+                        item.on('click', function() {
+                            selectItem(index);
+                        });
+                       $('#nextList').append(item);
                     }
-                }
+                });
             }
         }
         if (title == '') {
@@ -55,11 +60,16 @@ function getDestination(random, param) {
 function getLinksByTitle(title, plcontinue){
     $.getJSON("https://ja.wikipedia.org/w/api.php?format=json&action=query&prop=links&pllimit=500&origin=*&titles="+title+plcontinue, function (json){
         for (const page in json.query.pages) {
-            for (const link in json.query.pages[page].links) {
-                if (json.query.pages[page].links[link].ns == 0) {
-                    $('#nextList').append($('<option>').html(json.query.pages[page].links[link].title).val(json.query.pages[page].links[link].title));
+            $('#now_keyword')[0].innerText = json.query.pages[page].title;
+            json.query.pages[page].links.forEach(function (link, index) {
+                if (link.ns == 0) {
+                    let item = $('<li>').html(link.title);
+                    item.on('click', function() {
+                        selectItem(index);
+                    });
+                   $('#nextList').append(item);
                 }
-            }
+            });
         }
         if (json.continue && json.continue.plcontinue) {
             getLinksByTitle(title, '&plcontinue=' + json.continue.plcontinue);
@@ -67,10 +77,21 @@ function getLinksByTitle(title, plcontinue){
     });
 }
 
+function selectItem(index) {
+    for (let i = 0; i < $("#nextList").children().length; i++) {
+        if (index == i) {
+            $("#nextList").children()[i].className = "select_item";
+            $("#selected_item")[0].value = $("#nextList").children()[i].innerText;
+        } else {
+            $("#nextList").children()[i].className = "un_select_item";
+        }
+    }
+}
 function today() {
     const today = new Date();
     const seed = ("" + today.getFullYear() + (today.getMonth()+10) + today.getDate()+10) * 1;
     const random = new Random(seed);
+    $('#choice')[0].value = 0
     if ($('#seed')[0].value != seed) {
         makeQuestion(random);
         $('#seed')[0].value = seed;
@@ -104,15 +125,22 @@ class Random {
 function goal() {
     alert('GOAL!');
 }
+function gameover() {
+    alert('GAME OVER');
+}
 
 function shot() {
-    const selectItem = $('#nextList').val();
-    $('#nextList > option').remove();
+    const selectItem = $('#selected_item')[0].value;
+    $("#selected_item")[0].value = "";
+    $('#nextList > li').remove();
     if (selectItem == $('#destination')[0].value) {
         goal();
-    } else {
-        $('#prevList').append($('<li>').html(selectItem));
+    } else if ($('#choice')[0].value <= 4) {
+        $('#prevList').children()[$('#choice')[0].value].innerText = selectItem;
+        $('#choice')[0].value = $('#choice')[0].value * 1 + 1;
         getLinksByTitle(selectItem, '');
+    } else {
+        gameover();
     }
 }
 
@@ -127,4 +155,3 @@ function popupDescription() {
     });
   }
 }
-
