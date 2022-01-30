@@ -11,32 +11,38 @@
     <script src="js/main.js"></script>
     <link rel="stylesheet" href="./css/cp.css" />
 </head>
-<body onload="today();popupDescription();" style="text-size-adjust: none; font-size:2em;">
+<body onload="today();popupDescription();" style="text-size-adjust: none; font-size:2em; background-color: #f6f6f6;">
 <input type="hidden" id="seed">
 <input type="hidden" id="orig_id">
 <input type="hidden" id="dest_id">
+<input type="hidden" id="selected_item">
+<input type="hidden" id="choice">
  <input type="hidden" id="destinationDetail">
- <div id="start_area"><div id="origin" style="width: 300px;"></div></div>
- <div id="via_area">
-   <ul id="prevList" style="width: 300px; list-style: '&#x2b07;';">
-   </ul>
-   <ul id="qList" style="width: 300px; list-style: '&#x2b07;';">
-       <li>？</li>
-   </ul>
- </div>
- <div id="goal_area" style="display:flex"><div id="destination" style="width: 300px;"></div><div id="question"style="">&#x2753;</div></div>
- <br>
- <br>
- <div id="next_area">
-   <select id="nextList" size="10" style="width: 300px;">
-   </select>
-  <input type="button" id="shot" value="GO" onclick="shot()">
- </div>
-
- <div class="popup" id="popup">
-    <div class="popup-inner" id="popup_description">
-    </div>
-    <div class="popup_bg" id="popup_bg"></div>
+ <div id="game" style="width:400px;  height:100%; margin:0 auto; background-color: #ffffff;">
+     <div id="title" class="title_area">Compedia</div>
+     <div id="start_area"><div id="origin" style="width: 100%; overflow:auto;"></div></div>
+     <div id="via_area" style="width: 100%;">
+       <ul id="prevList" clsss="via_list_scroll" style="list-style: '&#x2b07;';">
+           <li>？</li>
+           <li>？</li>
+           <li>？</li>
+           <li>？</li>
+           <li>？</li>
+       </ul>
+     </div>
+     <div id="goal_area" style="display:flex; width: 100%; overflow:auto;"><div id="destination" style=""></div><div id="question"style="">&#x2753;</div></div>
+     <hr />
+     <div id="next_area" style="width: 100%;">
+       <div id="now_keyword" class="now_keyword" ></div>
+       <ul id="nextList" class="next_list_scroll" style="">
+       </ul>
+      <div id="shot" class="btn" onclick="shot()">GO</div>
+     </div>
+     <div class="popup" id="popup">
+        <div class="popup-inner" id="popup_description">
+        </div>
+        <div class="popup_bg" id="popup_bg"></div>
+     </div>
  </div>
 
 </body>
