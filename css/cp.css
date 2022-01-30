@@ -65,7 +65,7 @@ ul {
     height:300px;
     padding:5px;
     margin:0 auto;
-    border:1px solid #000;
+    border: 1px solid #a2a9b1;
     background-color:#FFFFFF;
     color:#000;
 }
@@ -76,8 +76,9 @@ ul {
     padding:5px;
     margin:0 auto;
     text-align: center;
-    background-color:#000;
-    color:#FFF;
+    background-color:#C3D6EF;
+    color:#000;
+    border: 1px solid #a2a9b1;
     font-size: 0.8em;
 }
 
@@ -94,7 +95,8 @@ ul {
     padding:5px;
     margin:0 auto;
     text-align: center;
-    background-color:#C9C9C9;
+    background-color:#CCCCFF;
+    border: 1px solid #a2a9b1;
     font-size: 0.8em;
     cursor: pointer;
 }
