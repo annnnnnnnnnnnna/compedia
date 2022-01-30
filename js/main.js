@@ -133,7 +133,7 @@ function shot() {
     $("#selected_item")[0].value = "";
     $("#selected_index")[0].value = "";
     $('#nextList > li').remove();
-    if (selectItem == $('#destination')[0].value) {
+    if (selectItem == $('#destination')[0].innerText) {
         goal();
     } else if ($('#choice')[0].value <= 4) {
         $('#prevList').children()[$('#choice')[0].value].innerText = selectItem;
